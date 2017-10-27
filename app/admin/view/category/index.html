@@ -3,7 +3,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 分类管理 <span class="c-gray en">&gt;</span> 分类列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	
+	<!--<img style="margin:20px" width="280" height="140" src="{:url('index/map')}" alt="">-->
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
 		<a class="btn btn-primary radius" onclick="o2o_s_edit('添加生活服务分类','{:url('Category/add')}','','300')" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加分类</a></span> <span class="r"></span> </div>
 	<div class="mt-20">
@@ -30,7 +30,9 @@
 					<td>{$data.create_time}</td>
 					<td class="td-status"><a href="{:url('Category/status',['id'=>$data.id,'status'=>$data.status==1 ? 0 :1])}" title="点击修改状态">{$data.status |status}</a></td>
 					<!--{:url('category/index',['parent_id'=>$data.id])}  传递的url对应的控制器 后面数组就是传递的参数-->
-					<td class="td-manage"><a href="{:url('Category/index',['parent_id'=>$data.id])}">获取子栏目</a><a style="text-decoration:none" class="ml-5" onClick="o2o_s_edit('编辑','{:url('Category/edit',['id'=>$data.id])}','',300)" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
+					<td class="td-manage">
+						<a href="{:url('Category/index',['parent_id'=>$data.id])}">获取子栏目</a>
+						<a style="text-decoration:none" class="ml-5" onClick="o2o_s_edit('编辑','{:url('Category/edit',['id'=>$data.id])}','',300)" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>
 						<a style="text-decoration:none" class="ml-5" onClick="o2o_del('{:url('Category/status',['id'=>$data.id,'status'=>-1])}','')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 				</tr>
 			{/volist}

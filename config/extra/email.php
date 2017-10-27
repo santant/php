@@ -1,12 +1,11 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: MAC
- * Date: 2017/8/20
- * Time: 14:59
+ * 邮件相关的配置
  */
 return[
-    'host'=>'127.0.0.1',
-    'name' =>'12212@qq.com'
+    'host'=>'smtp.126.com',
+    'port' =>'25',
+    'username'=>'santants@126.com',
+    'password'=>'pj123456',
 ];
