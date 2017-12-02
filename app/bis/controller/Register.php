@@ -42,7 +42,7 @@ class Register extends Controller
         //基本信息入库
         //商户基本信息
         $bisData = [
-            'name' => $data['name'],
+            'name' => htmlentities($data['name']),
             'city_id' => $data['city_id'],
             'city_path' => empty($data['se_city_id']) ? $data['city_id'] : $data['city_id'] . ',' . $data['se_city_id'],
             'logo' => $data['logo'],
@@ -60,8 +60,8 @@ class Register extends Controller
 //      总店的相关信息入库
         $locationData = [
             'bis_id' => $bisId, //总店相关信息需要关联商户基本信息id
-            'tel' => $data['tel'],//电话
-            'name' => $data['name'],//法人
+            'tel' => htmlentities($data['tel']),//电话
+            'name' => htmlentities($data['name']),//法人
             'logo' => $data['logo'],//法人
             'contact' => $data['contact'],//联系人
             'category_id' => $data['category_id'],//发布产品主分类
@@ -76,14 +76,13 @@ class Register extends Controller
             'ypoint' => empty($lnglat['result']['location']['lat']) ? '' : $lnglat['result']['location']['lat']
         ];
         $locationId = model('BisLocation')->add($locationData);
-
         //账户相关的验证信息
         //商户账户相关用户信息入库
         $data['code'] = mt_rand(100,100000); //随机数
         $userData = [
             'bis_id' => $bisId, //用户需要关联商户基本信息id
-            'username'=>$data['username'],
-            'password'=>md5($data['password']),
+            'username'=>htmlentities($data['username']),
+            'password'=>md5($data['password'].$data['code']),
             'code'=>$data['code'],
             'is_main'=>1 //代表的是总管理员
         ];

@@ -8,7 +8,7 @@
 namespace app\index\model;
 use  think\Model;
 use traits\model\SoftDelete; //引入软删除的方法
-class User extends Model{
+class UserCope extends Model{
     #命名  User需要和数据库里面的表对应
 
     #引入软删除

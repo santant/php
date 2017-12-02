@@ -6,7 +6,8 @@
  * Time: 11:56
  */
 return [
-   'ak'=>'xooArv1ovjc3fwkwSh6YioOP',
+//   'ak'=>'xooArv1ovjc3fwkwSh6YioOP',
+   'ak'=>'nFjljhcL4VOp96ks4VQRC976jUHXrLYG',
     'baidu_map_url'=>'http://api.map.baidu.com/',
     'geocoder' =>'geocoder/v2/',
     'width'=>400,

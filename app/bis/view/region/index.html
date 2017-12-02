@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Region</title>
+    <style>
+        select {
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+<select name="" id="firstCity" class="select cityId">
+    {volist name="firstCity" id="data"}
+    <option value="{$data.Id}">{$data.Name}</option>
+    {/volist}
+</select>
+<select name="" id="twoCity" class="select cityId">
+    <option value=""></option>
+</select>
+<select name="" id="threeCity" class="select cityId">
+    <option value=""></option>
+</select>
+<button id="aaa">aaa</button>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+<script>
+    //公共的host地址
+    var PUBLIC= {
+        HOST:"http://localhost:8888/think_imooc/public/"
+    }
+    $(function () {
+        $("#firstCity").change(function () {
+            var id = $(this).val();
+            var str = '';
+            var str1 = '';
+            $.get(PUBLIC.HOST+"api/region/getCityByPid.html?id="+id, function(res){
+               var data = res.data;
+               console.log(data)
+                $(data).each(function (i,val) {
+                    str +="<option value='"+this.Id+"'>"+this.Name+"</option>"
+                })
+                $("#twoCity").html(str);
+               //两级联动
+                    $.get(PUBLIC.HOST+"api/region/getCityByPid.html?id="+$("#twoCity option").eq(0).val(), function(res){
+                        var data = res.data;
+                        $(data).each(function (i,val) {
+                            str1 +="<option value='"+this.Pid+"'>"+this.Name+"</option>"
+                        })
+                        $("#threeCity").html(str1);
+                    });
+            });
+        })
+
+        $("#twoCity").change(function () {
+            var id = $(this).val();
+            var str = '';
+            $.get(PUBLIC.HOST+"api/region/getCityByPid.html?id="+id, function(res){
+                var data = res.data;
+                $(data).each(function (i,val) {
+                    str +="<option value='"+this.Pid+"'>"+this.Name+"</option>"
+                })
+                $("#threeCity").html(str);
+            });
+        })
+    })
+</script>

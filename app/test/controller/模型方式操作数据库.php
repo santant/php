@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-use app\index\model\User;  //引入模型
+use app\index\model\UserCope;  //引入模型
 use think\Db;  //引入数据库db类
 
 class Index extends  Controller{
@@ -74,7 +74,7 @@ class Index extends  Controller{
 //
 //        $res = $userModel->save(); //可以返回更新条数
 
-        $userModel = new User;
+        $userModel = new UserCope;
         #批量添加
 //        $res = $userModel->saveAll([
 //           ['id'=>'10','username'=>'10'],
@@ -95,7 +95,7 @@ class Index extends  Controller{
 //         dump($res);
 
         #用where条件的方式删除
-        $res = User::where("id",8)
+        $res = UserCope::where("id",8)
             ->delete();
         dump($res);
     }

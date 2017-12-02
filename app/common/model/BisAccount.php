@@ -23,6 +23,10 @@ class BisAccount extends  BaseModel{ //BaseModel  继承这个方法，这个方
      public function  edit(){
 
      }
-
+    //用户登录的时候更新最后1次登录时间
+    public function  updateById($data,$id){
+         //allowField(true) 检测数据库里面的数据是否合法
+        return $this->allowField(true)->save($data,['id'=>$id]);
+    }
 
 }

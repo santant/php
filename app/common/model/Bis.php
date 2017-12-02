@@ -24,9 +24,16 @@ class Bis extends  BaseModel{  //BaseModel  继承这个方法，这个方法里
      * @param $status 状态
      */
      public function  getBisByStatus($status=0){
-          $data = [
-              'status'=>'0'
-          ];
+          if ($status==0){ //默认的时候不显示删除的部分
+              $data = [ //status 不等于-1
+                  'status'=>['neq',-1]
+              ];
+          } else{
+              $data = [
+                  'status'=> $status
+              ];
+          }
+
          $order = [
              'id'=>'desc'
          ];

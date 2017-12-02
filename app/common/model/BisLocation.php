@@ -24,5 +24,54 @@ class BisLocation extends  BaseModel{ //BaseModel  继承这个方法，这个�
 
      }
 
+    public function  getLocationByStatus($is_main=0,$bis_id){
+        $data = [
+            'is_main'=> $is_main,
+            'bis_id'=>$bis_id
+        ];
+        $order = [
+            'id'=>'desc'
+        ];
+        return  $this->where($data)
+            ->order($order)
+            ->paginate();  //查询所有数据
+    }
+    public function  getLocationByfendian($is_main=0,$status=0){ //查询状态值不为-1的分店
+        if ($status==0){
+            $data = [
+                'status'=>['neq',-1],
+                'is_main'=> $is_main
+            ];
+        }else{
+            $data = [
+                'status'=>$status,
+                'is_main'=> $is_main
+            ];
+        }
+        $order = [
+            'id'=>'desc'
+        ];
+        return  $this->where($data)
+            ->order($order)
+            ->paginate();  //查询所有数据
+    }
 
+//   根据当前的bis_id查询支持的门店
+    public  function  getNormalLocationByBisId($bisId){
+        $data = [
+            'status'=>1,
+            'bis_id'=>$bisId
+        ];
+        $ret = $this->where($data)->order('id','desc')->select();
+        return $ret;
+    }
+
+    //根据id获取分店信息
+    public function  getlocationInId($ids){
+        $data = [
+          'id'=>intval($ids),
+            'status'=>1
+        ];
+        return $this->where($data)->select();
+    }
 }

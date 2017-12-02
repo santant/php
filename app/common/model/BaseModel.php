@@ -16,4 +16,8 @@ class BaseModel extends  Model
         $this->save($data);
         return $this->id;  //保存，数据，返回组件id
     }
+    //根据id修改字段
+    public function  updateById($data,$id){
+        return $this->allowField(true)->save($data,['id'=>$id]);
+    }
 }

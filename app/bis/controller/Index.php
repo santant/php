@@ -1,10 +1,13 @@
 <?php
 namespace app\bis\controller;
-
-class Index
+use  think\Controller;
+class Index extends  Base
 {
     public function index()
     {
-        return 'bis模块';
+        return $this->fetch();
+    }
+    public function  welcome(){
+        echo '欢迎个人商户登录';
     }
 }

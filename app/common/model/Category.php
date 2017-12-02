@@ -50,4 +50,35 @@ class Category extends  Model{
                       ->paginate();  //->paginate(2);每页显示2条,默认15条
 //                    ->select();  //->select(); 查询所有
       }
+
+
+    //获取前面5条数据
+    public  function  getNormalCategoryByParentId($id=0,$limit=5){
+        $data = [ //status 不等于-1
+            'parent_id'=>$id,
+            'status'=>1
+        ];
+        $order = [
+            'listorder'=>'desc',  //按照listorder排序
+            'id'=>'desc'
+        ];
+      $result =  $this->where($data)
+            ->order($order);
+       if ($limit){
+           $result = $result->limit($limit);
+       }
+       return $result->select();
+    }
+    //获取二级栏目的方法
+    public  function  getNormalCategoryByParentIdToData($ids){
+        $data = [ //status 不等于-1
+            'parent_id'=>['in',implode(',',$ids)], //给传递过来的数组索引切开，在查询数据
+            'status'=>1
+        ];
+        $order = [
+            'listorder'=>'desc',  //按照listorder排序
+            'id'=>'desc'
+        ];
+        return  $this->where($data)->order($order)->select();
+    }
 }

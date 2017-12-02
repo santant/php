@@ -30,6 +30,8 @@ function bisStatus($status){
         $str="<span class='label label-danger radius'>待审核</span>";
     }elseif ($status ==2){
         $str="<span class='label label-danger radius'>失败</span>";
+    }elseif ($status ==-1){
+        $str="<span class='label label-danger radius'>已删除</span>";
     }
     return $str;
 }
@@ -102,4 +104,35 @@ function getSeCityName($city_path){
     //拿到id之后查询他下面的字段返回
     $city = model('City')->get($cityId);
     echo $city->name;
+}
+
+/**
+ *  //栏目回显
+ */
+function getCategoryName($category_path){
+    //拿到id之后查询他下面的字段返回
+    $category_path = model('Category')->get($category_path);
+    echo $category_path->name;
+}
+/**
+ * @param $timeNumber 时间搓转换
+ */
+function setTime($timeNumber){
+    return date("Y-m-d H:i:s",$timeNumber);
+}
+
+//
+function countLocation($ids){
+    if (preg_match('/,/',$ids)){ //判断是否有,字符串中
+        $cityPath = explode(',',$ids);
+        return count($cityPath);
+    }else{
+        return count($ids);
+    }
+}
+//设置订单号
+function setOrderSn(){
+    list($t1,$t2) = explode(' ',microtime());
+    $t3 = explode('.',$t1*10000);
+    return $t2.$t3[0].(rand(10000,999999));
 }

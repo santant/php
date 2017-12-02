@@ -24,7 +24,19 @@ class City extends  Model
             ->order($order)
             ->select();
     }
-
+    //查询所有的城市
+    public function  getNormal(){
+        $data = [
+            'status'=>'1',
+            'parent_id'=>['gt',0]
+        ];
+        $order = [
+            'id'=>'desc'
+        ];
+        return $this->where($data)
+            ->order($order)
+            ->select();
+    }
     //查询一级分类
     public function  getNormalCategoryByParentId($parent_id=0){
         $data = [
@@ -37,5 +49,12 @@ class City extends  Model
         return $this->where($data)
             ->order($order)
             ->select();
+    }
+    //根据uname查询数据
+    public function getNameByUname($uname){
+        $data=[
+            'uname'=>$uname
+        ];
+      return  $this->where($data)->find();
     }
 }
